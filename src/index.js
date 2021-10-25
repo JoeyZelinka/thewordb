@@ -1,17 +1,69 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
+
+
+
+import {
+  DeckList,
+  SearchBar,
+  SearchResults
+} from './components';
+
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+const App = () => {
+  const [results, setResults] = useState([]);
+  const [deck, setDeck] = useState([]);
+
+  const addCardToDeck = ({ id, name }) => {
+    const nextDeck = [...deck];
+    const index = nextDeck.findIndex(card => card.id === id);
+
+    if (index > -1) {
+      nextDeck[index].count += 1;
+    } else {
+      nextDeck.push({
+        id,
+        name,
+        count: 1
+      });
+    }
+    setDeck(nextDeck);
+  }
+
+  const removeCardFromDeck = ({ id }) => {
+    const nextDeck = [...deck];
+    const index = nextDeck.findIndex(card => card.id === id);
+  
+    if (index === -1) {
+      return;
+    }
+
+    if (nextDeck[index].count === 1) {
+      nextDeck.splice(index, 1);
+    } else {
+      nextDeck[index].count -= 1;
+    }
+
+    setDeck(nextDeck);
+  }
+
+  return (
+    <div id="app">
+      <SearchBar setResults={setResults}/>
+      <SearchResults 
+        results={results}
+        addCardToDeck={ addCardToDeck }
+        removeCardFromDeck={removeCardFromDeck} />
+      <DeckList
+        deck={deck}
+        addCardToDeck={ addCardToDeck }
+        removeCardFromDeck={removeCardFromDeck} />
+    </div>
+  );
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App />,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
