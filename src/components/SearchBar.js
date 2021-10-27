@@ -24,7 +24,7 @@ const SearchBar = ({setResults}) => {
 
   return (
     <div id="search">
-        <h3>Look up cards here...</h3>
+        <h3>Card Search:</h3>
         <form onSubmit={ handleSubmit }>
           <input 
             type="text" 
