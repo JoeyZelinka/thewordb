@@ -1,37 +1,19 @@
 import React from 'react';
-
-import './Card.css';
+import { Button } from 'react-bootstrap'
+// import './Card.css';
 
 const Card = ({
   id,
   name,
-  type,
-  manaCost,
-  text,
-  flavor,
   imageUrl,
   addCardToDeck,
   removeCardFromDeck
 }) => {
   return (
-    <div className="Card">
-      <div className="info">
-        <p className="header">
-          { name } - { manaCost }
-        </p>
-        <p className="type">
-          { type }
-        </p>
-        <p className="text">
-          { text }
-        </p>
-        <p className="flavor">
-          { flavor }
-        </p>
-      </div>
+    <div className="Card">      
       <img className="preview" src={ imageUrl } alt=""/>
       <div className="actions">
-        <button
+        <Button variant="primary"
             onClick={() => {
               addCardToDeck({
                 id,
@@ -39,7 +21,7 @@ const Card = ({
               })
             }}>
               (+) Add to Deck
-            </button>
+            </Button>
           <button
             onClick={() => {
               removeCardFromDeck({
