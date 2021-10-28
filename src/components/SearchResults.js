@@ -18,19 +18,21 @@ useEffect ( () => {
 console.log(newResults)
   return (
     <div id="results">
-        <h3>Matching Cards ({results.length}):</h3>
-        <div className="CardList">
-          {
-            newResults.map((result) => (
-              <Card key={result.id}
-              addCardToDeck={ addCardToDeck }
-              removeCardFromDeck={ removeCardFromDeck }
+      <h3>Matching Cards ({results.length}):</h3>
+      <div className="CardList">
+        {
+          newResults.map((result) => (
+            <Card
+              key={result.id}
+              addCardToDeck={addCardToDeck}
+              removeCardFromDeck={removeCardFromDeck}
               {...result} />
-            ))
-          }
-        </div>
-    </div>
+          ))
+        }
+      </div>
+    </div> 
   );
-}
+      }
+
 
 export default SearchResults;
